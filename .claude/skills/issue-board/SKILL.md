@@ -26,4 +26,6 @@ A skill is a repeatable set of instructions followed in this conversation. Follo
 
 - Open a second issue for a title that already exists.
 - Mark a card `done` because the sub-agent said it was finished. Mark it `done` only after the acceptance criteria are yes.
-- Put confidential data, secrets, or manuscript text on an issue.
+- Put secrets, or prose pasted from the anchor manuscript or research notes, on an issue.
+- Move the literature card to `in-progress` before the model card is `done`.
+- Move the extensions card to `in-progress` before the literature card is `done`.

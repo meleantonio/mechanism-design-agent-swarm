@@ -9,9 +9,9 @@ import open_issue_cards
 
 def test_parse_card_reads_the_h1() -> None:
     """The issue title is the H1, and the body keeps the card text."""
-    title, body = open_issue_cards.parse_card("# [Toy] Example\n\nHello.\n")
-    assert title == "[Toy] Example"
-    assert body.startswith("# [Toy] Example")
+    title, body = open_issue_cards.parse_card("# Example card\n\nHello.\n")
+    assert title == "Example card"
+    assert body.startswith("# Example card")
     assert body.endswith("\n")
 
 
@@ -22,8 +22,14 @@ def test_parse_card_rejects_a_missing_title() -> None:
 
 
 def test_repo_cards_parse() -> None:
-    """Every card in issues/ has a title."""
+    """Every card in issues/ has a title for one theorist stage."""
     paths = open_issue_cards.card_paths()
     assert len(paths) == 4
     titles = [open_issue_cards.parse_card(path.read_text(encoding="utf-8"))[0] for path in paths]
-    assert all(title.startswith("[Toy] ") for title in titles)
+    assert titles == [
+        "Review the three stages against the anchor",
+        "Propose setups and extensions",
+        "Review the related literature",
+        "Set up the model",
+    ]
+    assert all(not title.startswith("[Toy] ") for title in titles)
